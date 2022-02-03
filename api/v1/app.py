@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """app module - endpoints"""
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -16,6 +16,14 @@ app.register_blueprint(app_views)
 def close(self):
     """Method that calls storage close method"""
     storage.close()
+
+
+@app.errorhandler(404)
+def error_handler(self):
+    """Method that returns a JSON-formatted
+       404 status code
+    """
+    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == "__main__":
