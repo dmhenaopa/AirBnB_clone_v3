@@ -28,7 +28,7 @@ def get_place_amenities(place_id):
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
                  methods=['DELETE', 'POST'], strict_slashes=False)
-def delete_amenity(place_id, amenity_id):
+def delete_place_amenity(place_id, amenity_id):
     """Delete an object Amenity by place_id"""
     flag = False
     place_object = storage.get(Place, place_id)
@@ -38,24 +38,21 @@ def delete_amenity(place_id, amenity_id):
     amenity_object = storage.get(Amenity, amenity_id)
     if amenity_object is None:
         return error_handler(amenity_object)
-
-    for amenity in place_object.amenities:
-        if amenity.id == amenity_id:
-            flag = True
-            break
-
-    if flag:
-        if request.method == 'DELETE':
-            storage.delete(object)
+    if request.method == 'DELETE':
+        for amenity in place_object.amenities:
+            if amenity.id == amenity_id:
+                flag = True
+                break
+        if flag:
+            place_object.amenities.remove(amenity_object)
             storage.save()
             return jsonify({}), 200
-        else:
-            dictionary = {}
-            dictionary['id'] = amenity_id
-            new_amenity = Amenity(**dictionary)
-            storage.new(new_amenity)
-            new_json = json.dumps(new_amenity.to_dict())
-            storage.save()
-            return new_json, 201
-
-    return error_handler(object)
+        return error_handler(object)
+    else:
+        for amenity in place_object.amenities:
+            if amenity.id == amenity_id:
+                return json.dumps(amenity_object.to_dict()), 200
+        place_object.amenities.append(amenity_object)
+        new_json = json.dumps(amenity_object.to_dict())
+        storage.save()
+        return new_json, 201
