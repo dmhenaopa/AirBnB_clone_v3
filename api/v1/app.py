@@ -28,6 +28,14 @@ def error_handler(self):
     return jsonify({"error": "Not found"}), 404
 
 
+@app.errorhandler(400)
+def error_handler_400(self):
+    """Method that returns a JSON-formatted
+       400 status code
+    """
+    return jsonify({"error": self}), 400
+
+
 if __name__ == "__main__":
     app.run(host=getenv("HBNB_API_HOST"),
             port=getenv("HBNB_API_PORT"),
