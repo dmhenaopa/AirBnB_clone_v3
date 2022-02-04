@@ -5,7 +5,7 @@
    that handles all default RESTFul API actions
 """
 from flask import request
-from api.v1.app import error_handler, error_handler_400
+from api.v1.app import error_handler_404, error_handler_400
 from api.v1.views.index import *
 from models.amenity import Amenity
 from models.place import Place
@@ -23,7 +23,7 @@ def get_place_amenities(place_id):
             new_array.append(amenity.to_dict())
         return json.dumps(new_array)
     else:
-        return error_handler(new_dict)
+        return error_handler_404(new_dict)
 
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
@@ -33,11 +33,11 @@ def delete_place_amenity(place_id, amenity_id):
     flag = False
     place_object = storage.get(Place, place_id)
     if place_object is None:
-        return error_handler(place_object)
+        return error_handler_404(place_object)
 
     amenity_object = storage.get(Amenity, amenity_id)
     if amenity_object is None:
-        return error_handler(amenity_object)
+        return error_handler_404(amenity_object)
     if request.method == 'DELETE':
         for amenity in place_object.amenities:
             if amenity.id == amenity_id:
@@ -47,7 +47,7 @@ def delete_place_amenity(place_id, amenity_id):
             place_object.amenities.remove(amenity_object)
             storage.save()
             return jsonify({}), 200
-        return error_handler(object)
+        return error_handler_404(object)
     else:
         for amenity in place_object.amenities:
             if amenity.id == amenity_id:

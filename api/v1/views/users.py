@@ -4,7 +4,7 @@
    default RESTFul API actions
 """
 from flask import request
-from api.v1.app import error_handler, error_handler_400
+from api.v1.app import error_handler_404, error_handler_400
 from api.v1.views.index import *
 from models.user import User
 import json
@@ -25,7 +25,7 @@ def get_user(user_id):
     """Return json file of object User, filtered with id"""
     new_dict = storage.get(User, user_id)
     if new_dict is None:
-        return error_handler(new_dict)
+        return error_handler_404(new_dict)
     else:
         return json.dumps(new_dict.to_dict())
 
@@ -36,7 +36,7 @@ def delete_user(user_id):
     """Delete an object User by id"""
     object = storage.get(User, user_id)
     if object is None:
-        return error_handler(object)
+        return error_handler_404(object)
     else:
         storage.delete(object)
         storage.save()
@@ -72,7 +72,7 @@ def update_user(user_id):
     """Update information of an object User by id"""
     object = storage.get(User, user_id)
     if object is None:
-        return error_handler(object)
+        return error_handler_404(object)
 
     try:
         request_data = request.get_json()

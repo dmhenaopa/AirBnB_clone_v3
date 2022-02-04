@@ -4,7 +4,7 @@
    default RESTFul API actions
 """
 from flask import request
-from api.v1.app import error_handler, error_handler_400
+from api.v1.app import error_handler_404, error_handler_400
 from api.v1.views.index import *
 from models.city import City
 import json
@@ -21,7 +21,7 @@ def get_cities(state_id):
             new_array.append(city.to_dict())
         return json.dumps(new_array)
     else:
-        return error_handler(new_dict)
+        return error_handler_404(new_dict)
 
 
 @app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
@@ -29,7 +29,7 @@ def get_city(city_id):
     """Return json file of object City, filtered with id"""
     new_dict = storage.get(City, city_id)
     if new_dict is None:
-        return error_handler(new_dict)
+        return error_handler_404(new_dict)
     else:
         return json.dumps(new_dict.to_dict())
 
@@ -40,7 +40,7 @@ def delete_city(city_id):
     """Delete an object City by id"""
     object = storage.get(City, city_id)
     if object is None:
-        return error_handler(object)
+        return error_handler_404(object)
     else:
         storage.delete(object)
         storage.save()
@@ -53,7 +53,7 @@ def create_city(state_id):
     """Create a new object City"""
     state_dict = storage.get('State', state_id)
     if state_dict is None:
-        return error_handler(state_dict)
+        return error_handler_404(state_dict)
 
     try:
         request_data = request.get_json()
@@ -78,7 +78,7 @@ def update_city(city_id):
     """Update information of an object City by id"""
     object = storage.get(City, city_id)
     if object is None:
-        return error_handler(object)
+        return error_handler_404(object)
 
     try:
         request_data = request.get_json()

@@ -21,7 +21,7 @@ def close(self):
 
 
 @app.errorhandler(404)
-def error_handler(self):
+def error_handler_404(self):
     """Method that returns a JSON-formatted
        404 status code
     """

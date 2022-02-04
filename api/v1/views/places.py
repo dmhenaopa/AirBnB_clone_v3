@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Blueprint and routes"""
 from flask import request
-from api.v1.app import error_handler, error_handler_400
+from api.v1.app import error_handler_404, error_handler_400
 from api.v1.views.index import *
 from models.place import Place
 from models.city import City
@@ -15,7 +15,7 @@ def get_places_city(city_id):
     object = storage.get(City, city_id)
     new_array = []
     if object is None:
-        return error_handler(object)
+        return error_handler_404(object)
     for object_place in object.places:
         new_array.append(object_place.to_dict())
     return json.dumps(new_array)
@@ -27,7 +27,7 @@ def get_place(place_id):
     """Return json file of object place, filtered with id"""
     new_dict = storage.get(Place, place_id)
     if new_dict is None:
-        return error_handler(new_dict)
+        return error_handler_404(new_dict)
     return json.dumps(new_dict.to_dict())
 
 
@@ -37,7 +37,7 @@ def delete_place(place_id):
     """Delete an object place by id"""
     object = storage.get(Place, place_id)
     if object is None:
-        return error_handler(object)
+        return error_handler_404(object)
     storage.delete(object)
     storage.save()
     return jsonify({}), 200
@@ -49,7 +49,7 @@ def create_place(city_id):
     """Create a new object place"""
     object_city = storage.get(City, city_id)
     if object_city is None:
-        return error_handler(object_city)
+        return error_handler_404(object_city)
     try:
         request_data = request.get_json()
     except Exception:
@@ -59,7 +59,7 @@ def create_place(city_id):
         return error_handler_400("Missing user_id")
     object_user = storage.get(User, dict_info_place['user_id'])
     if object_user is None:
-        return error_handler(object)
+        return error_handler_404(object)
     if 'name' not in request_data:
         return error_handler_400("Missing name")
     dict_info_place['city_id'] = city_id
@@ -75,7 +75,7 @@ def update_place(place_id):
     """Update information of an object place by id"""
     object = storage.get(Place, place_id)
     if object is None:
-        return error_handler(object)
+        return error_handler_404(object)
     try:
         request_data = request.get_json()
     except Exception:
