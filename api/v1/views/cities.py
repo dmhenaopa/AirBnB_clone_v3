@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Blueprint and routes"""
+"""
+   New City object that handles all
+   default RESTFul API actions
+"""
 from flask import request
 from api.v1.app import error_handler, error_handler_400
 from api.v1.views.index import *
