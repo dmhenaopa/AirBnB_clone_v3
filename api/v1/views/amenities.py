@@ -3,7 +3,7 @@
 from flask import request
 from api.v1.app import *
 from api.v1.views.index import *
-from models.amenity import Amenity
+from models.amenity import *
 import json
 
 
@@ -62,7 +62,7 @@ def update_amenity(amenity_id):
     """Update information of an object amenity by id"""
     object = storage.get(Amenity, amenity_id)
     if object is None:
-        return error_handler(object)
+        return error_handler_404(object)
     try:
         request_data = request.get_json()
     except Exception:
