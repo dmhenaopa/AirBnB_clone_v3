@@ -14,7 +14,7 @@ import json
                  methods=['GET'], strict_slashes=False)
 def get_place_reviews(place_id):
     """Return json file with all REVIEWS"""
-    new_dict = storage.get('Review', place_id)
+    new_dict = storage.get('Place', place_id)
     new_array = []
     if new_dict:
         for review in new_dict.reviews:
@@ -63,7 +63,7 @@ def create_review(place_id):
     if 'user_id' not in request_data:
         return error_handler_400("Missing user_id")
 
-    user_dict = storage.get('User', place_dict.user_id)
+    user_dict = storage.get('User', request_data['user_id'])
     if user_dict is None:
         return error_handler(user_dict)
 
@@ -71,6 +71,7 @@ def create_review(place_id):
         return error_handler_400("Missing text")
 
     information = dict(request_data)
+    information['place_id'] = place_id
     new_review = Review(**information)
     storage.new(new_review)
 
