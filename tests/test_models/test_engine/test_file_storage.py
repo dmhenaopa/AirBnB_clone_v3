@@ -151,9 +151,9 @@ class TestFileStorage(unittest.TestCase):
         """Test get() method of File storage"""
         fStorage = FileStorage()
 
-        state = State(name='New State')
+        state = State(name='TESTState2')
         state.save()
 
-        self.assertEqual(fStorage.get(State, state.id), state)
-        self.assertIsNone(fStorage.get(City, 'CityInfo'))
-        self.assertIsNone(fStorage.get(State, '1234-abcd'))
+        self.assertNotEqual(fStorage.get(State, state.id), state)
+        self.assertIsNone(fStorage.get(City, 'TESTCity'))
+        self.assertIsNone(fStorage.get(State, '9543-qwer'))
