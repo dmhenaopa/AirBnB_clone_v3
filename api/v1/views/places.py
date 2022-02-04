@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Blueprint and routes"""
 from flask import request
-from api.v1.app import error_handler_404, error_handler_400
 from api.v1.views.index import *
+from api.v1.app import *
 from models.place import Place
 from models.city import City
 import json
