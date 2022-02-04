@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Blueprint and routes"""
+"""Blueprint and routes to principals route system"""
 from api.v1.views import app_views
 from flask import jsonify
 from api.v1.app import storage
@@ -12,7 +12,7 @@ from models.user import User
 import json
 
 
-@app_views.route('/status', methods=['GET'], strict_slashes=False)
+@app_views.route('/status', methods=['GET'])
 def return_status():
     """Return json file with status"""
     return jsonify({
@@ -20,7 +20,7 @@ def return_status():
     })
 
 
-@app_views.route('/stats', methods=['GET'], strict_slashes=False)
+@app_views.route('/stats', methods=['GET'])
 def stats():
     """Return number of objects by type"""
     classes = {"amenities": Amenity, "cities": City,
