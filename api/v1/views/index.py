@@ -12,7 +12,7 @@ from models.user import User
 import json
 
 
-@app_views.route('/status', methods=['GET'])
+@app_views.route('/status', methods=['GET'], strict_slashes=False)
 def return_status():
     """Return json file with status"""
     return jsonify({
@@ -20,7 +20,7 @@ def return_status():
     })
 
 
-@app_views.route('/stats', methods=['GET'])
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def stats():
     """Return number of objects by type"""
     classes = {"amenities": Amenity, "cities": City,
