@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """Blueprint and routes"""
-from os import abort
 import re
-from flask import request
+from flask import request, abort
 from api.v1.app import *
 from api.v1.views.index import *
 from models.state import State
