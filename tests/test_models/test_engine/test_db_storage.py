@@ -5,9 +5,7 @@ Contains the TestDBStorageDocs and TestDBStorage classes
 
 from datetime import datetime
 import inspect
-from xxlimited import new
 import models
-from models import storage
 from models.engine import db_storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -20,8 +18,6 @@ import json
 import os
 import pep8
 import unittest
-import pycodestyle
-
 DBStorage = db_storage.DBStorage
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
@@ -72,8 +68,8 @@ test_db_storage.py'])
                             "{:s} method needs a docstring".format(func[0]))
 
 
-class TestDBStorage(unittest.TestCase):
-    """Test the DBStorage class"""
+class TestFileStorage(unittest.TestCase):
+    """Test the FileStorage class"""
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_returns_dict(self):
         """Test that all returns a dictionaty"""
@@ -90,42 +86,3 @@ class TestDBStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
-
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
-    def test_count_current(self):
-        """Test count() method of DB storage"""
-
-        clsObjects = storage.all()
-        clsCount = storage.count()
-        stateObjects = storage.all('State')
-        stateCount = storage.count(State)
-
-        self.assertEqual(len(clsObjects), clsCount)
-        self.assertEqual(len(stateObjects), stateCount)
-
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
-    def test_count_add(self):
-        """Test count() method of DB storage, adding a new object"""
-
-        clsObjects = storage.all()
-        stateObjects = storage.all('State')
-
-        state = State(name='TestState')
-        state.save()
-
-        clsCount = storage.count()
-        stateCount = storage.count(State)
-
-        self.assertEqual((len(clsObjects) + 1), clsCount)
-        self.assertEqual((len(stateObjects) + 1), stateCount)
-
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
-    def test_get(self):
-        """Test get() method of DB storage"""
-
-        state = State(name='New State')
-        state.save()
-
-        self.assertEqual(storage.get('State', state.id), state)
-        self.assertIsNone(storage.get('State', '1234-abcd'))
-        self.assertIsNone(storage.get(None, state.id))
