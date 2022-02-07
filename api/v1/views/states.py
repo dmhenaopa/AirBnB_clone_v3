@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Blueprint and routes"""
+from os import abort
+import re
 from flask import request
 from api.v1.app import *
 from api.v1.views.index import *
@@ -22,7 +24,7 @@ def get_state(states_id):
     """Return json file of object State, filtered with id"""
     new_dict = storage.get(State, states_id)
     if new_dict is None:
-        return error_handler_404(new_dict)
+        return abort(404)
     else:
         return json.dumps(new_dict.to_dict())
 
@@ -33,11 +35,10 @@ def delete_state(states_id):
     """Delete an object State by id"""
     object = storage.get(State, states_id)
     if object is None:
-        return error_handler_404(object)
-    else:
-        storage.delete(object)
-        storage.save()
-        return jsonify({}), 200
+        return abort(404)
+    storage.delete(object)
+    storage.save()
+    return jsonify({}), 200
 
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
@@ -50,11 +51,11 @@ def create_state():
     if 'name' not in request_data:
         return error_handler_400("Missing name")
     info_state = dict(request_data)
-    new_state = State(**info_state)
-    storage.new(new_state)
+    new_state = State(**request_data)
+    # storage.new(new_state)
     new_json = json.dumps(new_state.to_dict())
-    storage.save()
-    return new_json, 201
+    new_state.save()
+    return jsonify(new_state.to_dict()), 201
 
 
 @app_views.route('/states/<states_id>', methods=['PUT'], strict_slashes=False)
@@ -62,7 +63,7 @@ def update_state(states_id):
     """Update information of an object State by id"""
     object = storage.get(State, states_id)
     if object is None:
-        return error_handler_404(object)
+        return abort(404)
     try:
         request_data = request.get_json()
     except Exception:
