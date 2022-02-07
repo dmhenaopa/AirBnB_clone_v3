@@ -55,9 +55,8 @@ def create_review(place_id):
     if place_dict is None:
         return error_handler_404(place_dict)
 
-    try:
-        request_data = request.get_json()
-    except Exception:
+    request_data = request.get_json()
+    if not request_data:
         return error_handler_400("Not a JSON")
 
     if 'user_id' not in request_data:
@@ -87,9 +86,8 @@ def update_review(review_id):
     if object is None:
         return error_handler_404(object)
 
-    try:
-        request_data = request.get_json()
-    except Exception:
+    request_data = request.get_json()
+    if not request_data:
         return error_handler_400("Not a JSON")
 
     ignore = ["id", "created_at", "updated_at", "user_id", "place_id"]

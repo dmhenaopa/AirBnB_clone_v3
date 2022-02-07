@@ -55,9 +55,8 @@ def create_city(state_id):
     if state_dict is None:
         return error_handler_404(state_dict)
 
-    try:
-        request_data = request.get_json()
-    except Exception:
+    request_data = request.get_json()
+    if not request_data:
         return error_handler_400("Not a JSON")
 
     if 'name' not in request_data:
@@ -80,9 +79,8 @@ def update_city(city_id):
     if object is None:
         return error_handler_404(object)
 
-    try:
-        request_data = request.get_json()
-    except Exception:
+    request_data = request.get_json()
+    if not request_data:
         return error_handler_400("Not a JSON")
 
     ignore = ["id", "created_at", "updated_at", "state_id"]

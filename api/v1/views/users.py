@@ -47,9 +47,8 @@ def delete_user(user_id):
                  methods=['POST'], strict_slashes=False)
 def create_user():
     """Create a new object User"""
-    try:
-        request_data = request.get_json()
-    except Exception:
+    request_data = request.get_json()
+    if not request_data:
         return error_handler_400("Not a JSON")
 
     if 'email' not in request_data:
@@ -74,9 +73,8 @@ def update_user(user_id):
     if object is None:
         return error_handler_404(object)
 
-    try:
-        request_data = request.get_json()
-    except Exception:
+    request_data = request.get_json()
+    if not request_data:
         return error_handler_400("Not a JSON")
 
     ignore = ["id", "created_at", "updated_at", "email"]
