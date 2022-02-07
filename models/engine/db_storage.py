@@ -75,7 +75,7 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
-    def get(self, cls, id):
+    def get(self, cls=None, id=None):
         """Get an object repect id"""
         # if cls is None or cls is classes[clss] or cls is clss:
         new_dict = self.all()
