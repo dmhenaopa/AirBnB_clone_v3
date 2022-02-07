@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """Blueprint and routes"""
 from flask import request, abort, jsonify
-# from api.v1.app import *
-from api.v1.views import app_views
+from api.v1.app import *
+from api.v1.views.index import *
 from models.state import State
-from models import storage
 import json
 
 
