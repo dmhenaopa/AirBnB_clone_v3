@@ -150,6 +150,78 @@ EOF  all  create  destroy  help  quit  show  update
 (hbnb) quit
 ```
 
+## AirBnB Clone V3 - RESTful API
+
+### Description
+
+In this part of the project, an API was built integrating Flask and REST.
+To run it:
+First, the server must be started. To run the server the following command is used:
+
+    HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db HBNB_API_HOST=0.0.0.0 HBNB_API_PORT=5000 python3 -m api.v1.app
+
+The following environment variables are required:
+|Variable|  |
+|:--:|:--:|
+| HBNB_MYSQL_USER | Database User |
+| HBNB_MYSQL_PWD | Password |
+| HBNB_MYSQL_HOST | Database Host |
+| HBNB_MYSQL_DB | MySQL Database |
+| HBNB_TYPE_STORAGE=db | Storage type |
+| HBNB_API_HOST | 0.0.0.0 |
+| HBNB_API_PORT | 5000 |
+
+After starting the server, the HTTP methods for each endpoint can be used as follows:
+
+    curl -X [REQUEST] http://0.0.0.0:5000/api/v1+ENDPOINT
+
+An example of this:
+
+    curl -X GET http://0.0.0.0:5000/api/v1/status
+
+The endpoints and HTTP methods available for each endpoint are summarized in the following table:
+
+|Endpoint/Route| HTTP methods/Request | RESTFul API actions |
+|:--:|:--:|:--:|
+| `/status` | [GET] | Status of the API
+| `/stats` | [GET] | Number of each objects by type
+||**States**||
+| `/states` | [GET] | List of all State objects
+| `/states/<state_id>` | [GET] | Retrieve a State object by id
+| `/states/<state_id>` | [DELETE] | Deletes a state object
+| `/states` | [POST] | Creates a State
+| `/states/<state_id>` | [PUT] | Updates a State object
+||**Cities**||
+| `/states/<state_id>/cities` | [GET] | Retrieves the list of all City objects of a State
+| `/cities/<city_id>` | [GET] | Retrieves a City object
+| `/cities/<city_id>` | [DELETE] | Deletes a City object
+| `/states/<state_id>/cities` | [POST] | Creates a City |
+| `/cities/<city_id>` | [PUT] | Updates a City object |
+||**Amenities**||
+| `/amenities` | [GET] | List of all Amenity objects |
+| `/amenities/<amenity_id>` | [GET] | Retrieves a Amenity object |
+| `/amenities/<amenity_id>` | [DELETE] | Deletes a Amenity object |
+| `/amenities` | [POST] | Creates a Amenity |
+| `/amenities/<amenity_id>` | [PUT] | Updates a Amenity object |
+||**Users**||
+| `/users` | [GET] | Retrieves the list of all User objects |
+| `/users/<user_id>` | [GET] | Retrieves a User object |
+| `/users/<user_id>` | [DELETE] | Deletes a User object |
+| `/users` | [POST] | Creates a User |
+| `/users/<user_id>` | [PUT] | Updates a User object |
+||**Place**||
+| `/cities/<city_id>/places` | [GET] | Retrieves the list of all Place objects of a City |
+| `/places/<place_id>` | [GET] | Retrieves a Place object |
+| `/places/<place_id>` | [DELETE] | Deletes a Place object |
+| `/cities/<city_id>/places` | [POST] | Creates a Place |
+| `/places/<place_id>` | [PUT] | Updates a Place object |
+||**Reviews**||
+| `/places/<place_id>/reviews` | [GET] | Retrieves the list of all Review objects |
+| `/reviews/<review_id>` | [GET] | Retrieves a Review object |
+| `/reviews/<review_id>` | [DELETE] | Deletes a Review object|
+| `/places/<place_id>/reviews` | [POST] | Creates a Review |
+| `/reviews/<review_id>` | [PUT] | Updates a Review object |
+
 ## Bugs
 No known bugs at this time. 
 
