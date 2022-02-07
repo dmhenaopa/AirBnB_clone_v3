@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Blueprint and routes"""
-import re
 from flask import request, abort
 from api.v1.app import *
 from api.v1.views.index import *
