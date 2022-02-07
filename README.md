@@ -150,9 +150,9 @@ EOF  all  create  destroy  help  quit  show  update
 (hbnb) quit
 ```
 
-## :rocket: AirBnB Clone V3 - RESTful API
+# :rocket: AirBnB Clone V3 - RESTful API
 
-### Description
+## Description
 
 In this part of the project, an API was built integrating Flask and REST.
 To run it:
@@ -231,9 +231,8 @@ Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://tw
 
 Second part of Airbnb: Joann Vuong
 
-Third part of Airbnb:
+### Third part of Airbnb:
 Andres Felipe Castaneda Pirateque - [Github](https://github.com/xy-human)
-
 Diana Maria Henao Parra - [Github](https://github.com/dmhenaopa)                 
 ## License
 Public Domain. No copy write protection. 
