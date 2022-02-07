@@ -142,9 +142,8 @@ def update_place(place_id):
     object = storage.get(Place, place_id)
     if object is None:
         return error_handler_404(object)
-    try:
-        request_data = request.get_json()
-    except Exception:
+    request_data = request.get_json()
+    if not request_data:
         return error_handler_400("Not a JSON")
     ignore = ["id", "user_id", "city_id", "created_at", "updated_at"]
     for key, value in dict(request_data).items():
