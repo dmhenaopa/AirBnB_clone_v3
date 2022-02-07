@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """Blueprint and routes"""
-from flask import request, abort
-from api.v1.app import *
-from api.v1.views.index import *
+from flask import request, abort, jsonify
+# from api.v1.app import *
+from api.v1.views import app_views
 from models.state import State
+from models import storage
 import json
 
 
@@ -14,6 +15,7 @@ def get_states():
     new_array = []
     for object in new_dict.values():
         new_array.append(object.to_dict())
+    return jsonify(new_array)
     return json.dumps(new_array)
 
 
