@@ -5,7 +5,6 @@ from api.v1.views.index import *
 from api.v1.app import *
 from models.place import Place
 from models.city import City
-import copy
 import json
 
 
@@ -51,9 +50,8 @@ def create_place(city_id):
     object_city = storage.get(City, city_id)
     if object_city is None:
         return error_handler_404(object_city)
-    try:
-        request_data = request.get_json()
-    except Exception:
+    request_data = request.get_json()
+    if not request_data:
         return error_handler_400("Not a JSON")
     dict_info_place = dict(request_data)
     if 'user_id' not in dict_info_place.keys():
@@ -74,9 +72,8 @@ def create_place(city_id):
                  strict_slashes=False)
 def places_search():
     """Create a new object place"""
-    try:
-        request_data = request.get_json()
-    except Exception:
+    request_data = request.get_json()
+    if not request_data:
         return error_handler_400("Not a JSON")
     new_array = []
     if (str(request_data) == "{}" or
