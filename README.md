@@ -168,8 +168,8 @@ The following environment variables are required:
 | HBNB_MYSQL_HOST | Database Host |
 | HBNB_MYSQL_DB | MySQL Database |
 | HBNB_TYPE_STORAGE=db | Storage type |
-| HBNB_API_HOST | 0.0.0.0 |
-| HBNB_API_PORT | 5000 |
+| HBNB_API_HOST | API Host |
+| HBNB_API_PORT | API Port |
 
 After starting the server, the HTTP methods for each endpoint can be used as follows:
 
