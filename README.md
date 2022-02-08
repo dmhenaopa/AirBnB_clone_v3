@@ -184,38 +184,56 @@ The endpoints and HTTP methods available for each endpoint are summarized in the
 |Endpoint/Route| HTTP methods/Request | RESTFul API actions |
 |:--:|:--:|:--:|
 | `/status` | [GET] | Status of the API
-| `/stats` | [GET] | Number of each objects by type
-||**States**||
+| `/stats` | [GET] | Number of each objects by type  
+
+### States
+|Endpoint/Route| HTTP methods/Request | RESTFul API actions |
+|:--:|:--:|:--:|
 | `/states` | [GET] | List of all State objects
 | `/states/<state_id>` | [GET] | Retrieve a State object by id
 | `/states/<state_id>` | [DELETE] | Deletes a state object
 | `/states` | [POST] | Creates a State
-| `/states/<state_id>` | [PUT] | Updates a State object
-||**Cities**||
+| `/states/<state_id>` | [PUT] | Updates a State object  
+
+### Cities
+|Endpoint/Route| HTTP methods/Request | RESTFul API actions |
+|:--:|:--:|:--:|
 | `/states/<state_id>/cities` | [GET] | Retrieves the list of all City objects of a State
 | `/cities/<city_id>` | [GET] | Retrieves a City object
 | `/cities/<city_id>` | [DELETE] | Deletes a City object
 | `/states/<state_id>/cities` | [POST] | Creates a City |
-| `/cities/<city_id>` | [PUT] | Updates a City object |
-||**Amenities**||
+| `/cities/<city_id>` | [PUT] | Updates a City object |  
+
+### Amenities
+|Endpoint/Route| HTTP methods/Request | RESTFul API actions |
+|:--:|:--:|:--:|
 | `/amenities` | [GET] | List of all Amenity objects |
 | `/amenities/<amenity_id>` | [GET] | Retrieves a Amenity object |
 | `/amenities/<amenity_id>` | [DELETE] | Deletes a Amenity object |
 | `/amenities` | [POST] | Creates a Amenity |
-| `/amenities/<amenity_id>` | [PUT] | Updates a Amenity object |
-||**Users**||
+| `/amenities/<amenity_id>` | [PUT] | Updates a Amenity object |  
+
+### Users
+|Endpoint/Route| HTTP methods/Request | RESTFul API actions |
+|:--:|:--:|:--:|
 | `/users` | [GET] | Retrieves the list of all User objects |
 | `/users/<user_id>` | [GET] | Retrieves a User object |
 | `/users/<user_id>` | [DELETE] | Deletes a User object |
 | `/users` | [POST] | Creates a User |
-| `/users/<user_id>` | [PUT] | Updates a User object |
-||**Place**||
+| `/users/<user_id>` | [PUT] | Updates a User object |  
+
+### Places
+|Endpoint/Route| HTTP methods/Request | RESTFul API actions |
+|:--:|:--:|:--:|
 | `/cities/<city_id>/places` | [GET] | Retrieves the list of all Place objects of a City |
 | `/places/<place_id>` | [GET] | Retrieves a Place object |
 | `/places/<place_id>` | [DELETE] | Deletes a Place object |
 | `/cities/<city_id>/places` | [POST] | Creates a Place |
 | `/places/<place_id>` | [PUT] | Updates a Place object |
-||**Reviews**||
+
+### Reviews
+|Endpoint/Route| HTTP methods/Request | RESTFul API actions |
+|:--:|:--:|:--:|
 | `/places/<place_id>/reviews` | [GET] | Retrieves the list of all Review objects |
 | `/reviews/<review_id>` | [GET] | Retrieves a Review object |
 | `/reviews/<review_id>` | [DELETE] | Deletes a Review object|
